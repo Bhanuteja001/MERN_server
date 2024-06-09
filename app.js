@@ -7,9 +7,9 @@ const addAppointment=require('./router/AppointmentRout')
 const LoginRout = require('./router/LoginRout')
 let app = express();
 let nodemailer = require('nodemailer');
-
-
 require('dotenv').config();
+
+const port = process.env.PORT
 
 app.use(cors());
 app.use(express.json());
@@ -64,8 +64,11 @@ catch (error) {
 }
 })
 
-app.listen(4000);
 
 
+
+app.listen(port ,()=>{
+  console.log(port);
+})
 
 
