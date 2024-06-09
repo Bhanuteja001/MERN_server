@@ -8,6 +8,9 @@ const LoginRout = require('./router/LoginRout')
 let app = express();
 let nodemailer = require('nodemailer');
 
+
+require('dotenv').config();
+
 app.use(cors());
 app.use(express.json());
 
@@ -17,9 +20,13 @@ app.use('/doctor', addDoctor);
 app.use('/testimonial',addTestimonial);
 app.use('/appointment',addAppointment);
 app.use('/auth',LoginRout);
-//app.use('/appointment', require('./router/AppointmentRout'))
 
 app.post('/sendMail',(req,res)=>{
+
+
+  try {
+    
+ 
 
     const {name, email,subject,phone,message} = req.body;    
 
@@ -27,7 +34,7 @@ app.post('/sendMail',(req,res)=>{
         service: 'gmail',
         auth: {
           user: 'bhanuchiluka234@gmail.com',
-          pass: 'bagv kgex jmqi dabm'
+          pass: process.env.MAIL_SECRET
         }
       });
       
@@ -49,6 +56,11 @@ app.post('/sendMail',(req,res)=>{
       });
       
 
+
+} 
+catch (error) {
+  return res.send(error.message)
+}
 })
 
 app.listen(4000);

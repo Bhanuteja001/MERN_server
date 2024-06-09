@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
-let con=mongoose.connect('mongodb://localhost:27017/MERN_Project');
+require('dotenv').config();
+let con=mongoose.connect(process.env.DATABASE_URL);
 if(con){
     console.log("connected😁👍");
 }

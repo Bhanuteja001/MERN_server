@@ -13,7 +13,7 @@ LoginRout.post('/login',async(req,res)=>{
     if (!user || user.password!=password) {
         return res.send({error:"Invalid Credentials" , success:false})
     }
-    let token =  jwt.sign(password , "665ed4b4ecbebdabf872e736")
+    let token =  jwt.sign(password , process.env.JWT_SECRET)
     
     res.send({token:token , success:true})
 })
