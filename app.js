@@ -59,6 +59,7 @@ app.post('/sendMail',(req,res)=>{
 
 } 
 catch (error) {
+  console.log(error.message);
   return res.send(error.message)
 }
 })
